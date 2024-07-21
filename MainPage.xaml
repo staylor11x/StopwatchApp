@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StopwatchApp.MainPage"
+             BackgroundColor="Black">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="Black" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
+
+    <Grid Padding="20" RowSpacing="0" ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Centered Content -->
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <!-- Total Elapsed Time Display -->
+            <Label x:Name="TotalElapsedTimeLabel"
+                   Text="00:00.00"
+                   FontSize="30"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" />
+
+            <!-- Current Stopwatch Time Display -->
+            <Label x:Name="TimeLabel"
+                   Text="00:00.00"
+                   FontSize="60"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" />
+
+            <!-- Buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start" Spacing="20">
+                <Button x:Name="StartStopButton"
+                        Text="Start"
+                        Clicked="OnStartStopButtonClicked"
+                        BackgroundColor="#000000"  
+                        TextColor="#FF32CD32"
+                        FontSize="24"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        CornerRadius="50"
+                        BorderWidth="1.5"
+                        BorderColor="#FF32CD32"/>
+                <Button x:Name="LapButton"
+                        Text="Lap"
+                        Clicked="OnLapButtonClicked"
+                        BackgroundColor="#000000"  
+                        TextColor="#ad6ef0"
+                        FontSize="24"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        CornerRadius="50"
+                        BorderWidth="1.5"
+                        BorderColor="#ad6ef0"/>
+                <Button x:Name="ResetButton"
+                        Text="Reset"
+                        Clicked="OnResetButtonClicked"
+                        BackgroundColor="#000000"  
+                        TextColor="White"
+                        FontSize="24"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        CornerRadius="50"
+                        BorderWidth="1.5"
+                        BorderColor="White"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <!-- Lap Times ListView -->
+        <ListView x:Name="LapListView"
+                  Grid.Row="2"
+                  VerticalOptions="FillAndExpand"
+                  BackgroundColor="Black"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding LapNumber}"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding LapTime}"
+                                   TextColor="White"
+                                   Grid.Column="1"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding LapDifference}"
+                                   TextColor="White"
+                                   Grid.Column="2"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
