@@ -17,11 +17,17 @@ namespace StopwatchApp
         public MainPage()
         {
             InitializeComponent();
+            KeepScreenOn();
             _stopwatch = new Stopwatch();
             _lapStopwatch = new Stopwatch();
             _lapTimes = new ObservableCollection<LapTimeModel>();
             LapListView.ItemsSource = _lapTimes;
             Device.StartTimer(TimeSpan.FromMilliseconds(10), UpdateTime); // Update every 10 ms
+        }
+
+        private void KeepScreenOn()
+        {
+            DeviceDisplay.Current.KeepScreenOn = true;
         }
 
         private void OnStartStopButtonClicked(object sender, EventArgs e)
