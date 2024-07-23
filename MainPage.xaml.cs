@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls;
 
 namespace StopwatchApp
@@ -34,6 +35,11 @@ namespace StopwatchApp
                 StartStopButton.Text = "Start";
                 StartStopButton.TextColor = Colors.LimeGreen;
                 StartStopButton.BorderColor = Colors.LimeGreen;
+
+                LapResetButton.Text = "Reset";
+                LapResetButton.TextColor = Colors.OrangeRed;
+                LapResetButton.BorderColor = Colors.OrangeRed;
+
             }
             else
             {
@@ -42,11 +48,15 @@ namespace StopwatchApp
                 StartStopButton.Text = "Stop";
                 StartStopButton.TextColor = Colors.Red;
                 StartStopButton.BorderColor = Colors.Red;
+
+                LapResetButton.Text = "Lap";
+                LapResetButton.TextColor = Colors.BlueViolet;
+                LapResetButton.BorderColor = Colors.BlueViolet;
             }
             _isRunning = !_isRunning;
         }
 
-        private void OnLapButtonClicked(object sender, EventArgs e)
+        private void OnLapResetButtonClicked(object sender, EventArgs e)
         {
             HapticFeedback.Default.Perform(HapticFeedbackType.Click);
 
@@ -63,26 +73,33 @@ namespace StopwatchApp
                 _lastLapTime = totalElapsedTime;
                 _lapStopwatch.Restart();
             }
-        }
-
-        private void OnResetButtonClicked(object sender, EventArgs e)
-        {
-            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-
-            _stopwatch.Reset();
-            _lapStopwatch.Reset();
-            Device.BeginInvokeOnMainThread(() =>
+            else
             {
-                TimeLabel.Text = "00:00.00";
-                TotalElapsedTimeLabel.Text = "00:00.00";
-                StartStopButton.Text = "Start";
-                StartStopButton.TextColor = Colors.LimeGreen;
-                StartStopButton.BorderColor = Colors.LimeGreen;
-                _lapTimes.Clear();
-            });
-            _isRunning = false;
-            _lastLapTime = TimeSpan.Zero;
+                _stopwatch.Reset();
+                _lapStopwatch.Reset();
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    TimeLabel.Text = "00:00.00";
+                    TotalElapsedTimeLabel.Text = "00:00.00";
+                    StartStopButton.Text = "Start";
+                    StartStopButton.TextColor = Colors.LimeGreen;
+                    StartStopButton.BorderColor = Colors.LimeGreen;
+                    _lapTimes.Clear();
+                });
+                _isRunning = false;
+                _lastLapTime = TimeSpan.Zero;
+                LapResetButton.Text = "Lap";
+                LapResetButton.TextColor = Colors.BlueViolet;
+                LapResetButton.BorderColor = Colors.BlueViolet;
+            }
         }
+
+        //private void OnResetButtonClicked(object sender, EventArgs e)
+        //{
+        //    HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+        //
+        //    
+        //}
 
         private bool UpdateTime()
         {

@@ -17,14 +17,15 @@
         </Grid.RowDefinitions>
 
         <!-- Centered Content -->
-        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" >
             <!-- Total Elapsed Time Display -->
             <Label x:Name="TotalElapsedTimeLabel"
                    Text="00:00.00"
                    FontSize="30"
                    TextColor="White"
                    HorizontalOptions="Center"
-                   VerticalOptions="Start" />
+                   VerticalOptions="Start"
+                   Padding="0"/>
 
             <!-- Current Stopwatch Time Display -->
             <Label x:Name="TimeLabel"
@@ -32,10 +33,11 @@
                    FontSize="60"
                    TextColor="White"
                    HorizontalOptions="Center"
-                   VerticalOptions="Start" />
+                   VerticalOptions="Start"
+                   Padding="10"/>
 
             <!-- Buttons -->
-            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start" Spacing="20">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start" Spacing="60">
                 <Button x:Name="StartStopButton"
                         Text="Start"
                         Clicked="OnStartStopButtonClicked"
@@ -47,28 +49,17 @@
                         CornerRadius="50"
                         BorderWidth="1.5"
                         BorderColor="#FF32CD32"/>
-                <Button x:Name="LapButton"
+                <Button x:Name="LapResetButton"
                         Text="Lap"
-                        Clicked="OnLapButtonClicked"
+                        Clicked="OnLapResetButtonClicked"
                         BackgroundColor="#000000"  
-                        TextColor="#ad6ef0"
+                        TextColor="#FF8A2BE2"
                         FontSize="24"
                         WidthRequest="100"
                         HeightRequest="100"
                         CornerRadius="50"
                         BorderWidth="1.5"
-                        BorderColor="#ad6ef0"/>
-                <Button x:Name="ResetButton"
-                        Text="Reset"
-                        Clicked="OnResetButtonClicked"
-                        BackgroundColor="#000000"  
-                        TextColor="White"
-                        FontSize="24"
-                        WidthRequest="100"
-                        HeightRequest="100"
-                        CornerRadius="50"
-                        BorderWidth="1.5"
-                        BorderColor="White"/>
+                        BorderColor="#FF8A2BE2"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
@@ -81,7 +72,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10">
+                        <Grid Padding="15">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition Width="*"/>
